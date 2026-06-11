@@ -145,14 +145,14 @@ final class EtatController extends Controller
             $_SESSION['errors'] = $errors;
             $_SESSION['old']    = ['libelle' => $libelle];
             $_SESSION['flash']  = 'Merci de corriger les erreurs du formulaire.';
-            $this->redirect('./etat/' . $id . '/update');
+            $this->redirect('/index.php/etat/' . $id . '/update');
         }
 
         try {
             \Models\Etat::update($id, $libelle);
 
             $_SESSION['flash'] = 'État modifié avec succès.';
-            $this->redirect('./etat/' . $id);
+            $this->redirect('/index.php/etat/' . $id);
         } catch (\Throwable $e) {
             $_SESSION['flash'] = 'Impossible de modifier l’état.';
             $this->redirect('/index.php/etat/' . $id . '/update');

@@ -60,7 +60,7 @@ td a{display:inline-block;margin-bottom:5px}
         </div>
     <?php endif; ?>
 
-    <form method="post" action="/index.php/etat/<?= $etat['id'] ?>/update">
+    <form method="post" action="/index.php/etat/<?= (int)$etat['id'] ?>/update">
         <div class="field">
             <label for="libelle">Libellé</label>
             <input
