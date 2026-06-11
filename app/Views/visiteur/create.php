@@ -57,7 +57,7 @@ td a{display:inline-block;margin-bottom:5px}
         <?= htmlspecialchars($message, ENT_QUOTES, 'UTF-8'); ?>
     </div>
 <?php endif; ?>
-<form method="post" action="/visiteur/store">
+<form method="post" action="<?= BASE_URL ?>visiteur/store">
 
 
     <!-- Nom -->

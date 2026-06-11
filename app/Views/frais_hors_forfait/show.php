@@ -43,6 +43,7 @@ td a{display:inline-block;margin-bottom:5px}
 
 </head>
 <body>
+    
     <h1>Détail du frais forfait</h1>
 
     <?php if (!empty($message)): ?>
@@ -58,7 +59,7 @@ td a{display:inline-block;margin-bottom:5px}
             <p><strong>montant :</strong> <?= htmlspecialchars($frais_hors_forfait['montant']) ?></p>
         
         </div>
-       <a class="button" href="/frais_hors_forfait">⬅ Retour à la liste</a>
+       <a class="button" href="<?= BASE_URL ?>frais_hors_forfait">⬅ Retour à la liste</a>
     <?php else: ?>
         <p>Frais forfait introuvable.</p>
         <a class="button" href="../frais_hors_forfait">Retour à la liste</a>

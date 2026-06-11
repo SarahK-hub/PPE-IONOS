@@ -60,7 +60,7 @@ td a{display:inline-block;margin-bottom:5px}
     <?php endif; ?>
 
       <form method="post"
-      action="/frais_hors_forfait/<?= $frais_hors_forfait['id'] ?>/update">
+      action="<?= BASE_URL ?>frais_hors_forfait/<?= $frais_hors_forfait['id'] ?>/update">
 
      <div class="field">
     <label for="date_frais">Date</label>
@@ -102,7 +102,7 @@ td a{display:inline-block;margin-bottom:5px}
     </div>
 
     <button type="submit">Enregistrer</button>
-   <a href="/frais_hors_forfait">Annuler</a>
+   <a href="<?= BASE_URL ?>frais_hors_forfait">Annuler</a>
 </form>
         
 

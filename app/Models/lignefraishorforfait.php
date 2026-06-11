@@ -11,7 +11,7 @@ final class lignefraishorforfait
         $pdo = Database::get();
 
         return $pdo->query("
-            SELECT ID, libelle
+            SELECT ID, libelle,montant
             FROM lignefraishorforfait
         ")->fetchAll();
     }
@@ -84,4 +84,36 @@ final class lignefraishorforfait
         ]);
     }
     
+    public static function updateMontant(int $id, float $montant): bool
+{
+    $pdo = Database::get();
+
+    $stmt = $pdo->prepare("
+        UPDATE lignefraishorforfait
+        SET montant = :montant
+        WHERE ID = :id
+    ");
+
+    return $stmt->execute([
+        'id' => $id,
+        'montant' => $montant
+    ]);
+}
+public static function updateLibelleEtMontant(int $id, string $libelle, float $montant): bool
+{
+    $pdo = Database::get();
+
+    $stmt = $pdo->prepare("
+        UPDATE lignefraishorforfait
+        SET libelle = :libelle,
+            montant = :montant
+        WHERE ID = :id
+    ");
+
+    return $stmt->execute([
+        'id' => $id,
+        'libelle' => $libelle,
+        'montant' => $montant
+    ]);
+}
 }

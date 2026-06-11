@@ -1,3 +1,9 @@
+<?php
+/** @var array $visiteurs */
+/** @var array $etats */
+/** @var array $frais */
+/** @var string $title */
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -44,16 +50,9 @@ td a{display:inline-block;margin-bottom:5px}
 
 <h1>Créer une fiche</h1>
 
-<form method="post" action="/fichefrais/store">
 
-<label>Visiteur</label>
-<select name="IDvisiteur">
-<?php foreach($visiteurs as $v): ?>
-<option value="<?= $v['ID'] ?>">
-<?= htmlspecialchars($v['NOM']) ?>
-</option>
-<?php endforeach ?>
-</select>
+<form method="post" action="<?= BASE_URL ?>fichefrais/store">
+
 
 <label>Mois</label>
 <select name="mois">
@@ -68,17 +67,8 @@ $mois = date('Y').sprintf('%02d',$i); ?>
 <label>Justificatifs</label>
 <input type="number" name="nbrJustificatifs">
 
-<label>Montant</label>
-<input type="number" step="0.01" name="montantValide">
 
-<label>Etat</label>
-<select name="idEtat">
-<?php foreach($etats as $e): ?>
-<option value="<?= $e['id'] ?>">
-<?= htmlspecialchars($e['libelle']) ?>
-</option>
-<?php endforeach ?>
-</select>
+
 
 <label>Frais hors forfait</label>
 <select name="idLigneFraisHorsForfait" required>
@@ -86,12 +76,33 @@ $mois = date('Y').sprintf('%02d',$i); ?>
 
 <?php foreach($frais as $f): ?>
 <option value="<?= $f['ID'] ?>">
-<?= htmlspecialchars($f['libelle']) ?>
+<?= htmlspecialchars($f['libelle']) ?>, 
+<?= htmlspecialchars($f['montant']) ?>€ 
 </option>
 <?php endforeach ?>
 
 </select>
 
+<label>un frais forfaitaire</label>
+<br>
+<label>frais forfait</label>
+<select name="idfraisforfait" required>
+<option value="">-- Choisir --</option>
 
+<?php foreach($fraisforfait as $f): ?>
+<option value="<?= $f['ID'] ?>">
+<?= htmlspecialchars($f['libelle']) ?>, 
+<?= htmlspecialchars($f['montant']) ?>€ 
+</option>
+<?php endforeach ?>
+
+</select>
+<label>quantité</label>
+<input type="number" step="1" name="quantite">
+
+
+<br>
+<br>
+<br>
 <button type="submit">Créer</button>
 </form>

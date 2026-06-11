@@ -1,138 +1,105 @@
+<?php
+/**
+ * Vue liste des fiches — rôle VISITEUR
+ * Affiche uniquement les fiches du visiteur connecté.
+ */
+?>
 <!doctype html>
 <html lang="fr">
 <head>
 <meta charset="utf-8">
-<title><?= htmlspecialchars($title ?? 'Fiches de frais') ?></title>
-
+<title><?= htmlspecialchars($title ?? 'Mes fiches de frais') ?></title>
 <style>
-body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:#f0f2f5;color:#2c3e50;margin:0;padding:0 20px}
-
+body{font-family:'Segoe UI',sans-serif;background:#f0f2f5;color:#2c3e50;margin:0;padding:0 20px}
 .topbar{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin:20px 0}
 .topbar h1{margin:0;font-size:1.8rem;flex:1}
-
-a.button,button,input[type=submit]{display:inline-block;padding:10px 16px;border-radius:6px;border:none;background:#3498db;color:#fff;font-weight:bold;cursor:pointer;text-decoration:none;transition:.3s,.2s}
-a.button:hover,button:hover,input[type=submit]:hover{background:#2980b9;transform:translateY(-2px)}
-
-.flash{padding:10px 15px;margin:15px 0;border-radius:6px;font-weight:bold}
-.flash-success{background:#2ecc71;color:#fff}
-.flash-error{background:#e74c3c;color:#fff}
-
-table{width:100%;max-width:1000px;border-collapse:collapse;border-radius:6px;overflow:hidden;box-shadow:0 4px 8px rgba(0,0,0,.05);background:#fff}
+a.button,button{display:inline-block;padding:10px 16px;border-radius:6px;border:none;background:#3498db;color:#fff;font-weight:bold;cursor:pointer;text-decoration:none}
+a.button:hover,button:hover{background:#2980b9}
+.flash{padding:10px 15px;margin:10px 0;border-radius:6px;background:#d4edda;color:#155724;font-weight:bold}
+table{width:100%;border-collapse:collapse;background:#fff;border-radius:6px;overflow:hidden;box-shadow:0 4px 8px rgba(0,0,0,.05)}
 th,td{padding:12px 15px;text-align:left}
-th{background:#3498db;color:#fff;text-transform:uppercase;font-size:.9rem}
+th{background:#3498db;color:#fff;text-transform:uppercase;font-size:.85rem}
 tr:nth-child(even){background:#f2f6fc}
 tr:hover{background:#d6eaf8}
-td a{color:#3498db;font-weight:bold;text-decoration:none}
-td a:hover{text-decoration:underline}
-
-form{max-width:500px;background:#fff;padding:20px;border-radius:6px;box-shadow:0 4px 10px rgba(0,0,0,.05);margin-bottom:30px}
-.field{margin-bottom:15px}
-label{display:block;margin-bottom:5px;font-weight:bold}
-input[type=text],input[type=number],textarea{width:100%;padding:8px 12px;border-radius:6px;border:1px solid #ccc;font-size:1rem;box-sizing:border-box}
-input:focus,textarea:focus{outline:none;border-color:#3498db}
-
-.error{color:#e74c3c;font-size:.9rem;margin-top:4px}
-
-@media(max-width:600px){
-.topbar{flex-direction:column;align-items:flex-start}
-table,th,td{font-size:.9rem}
-input,button,a.button{width:100%;margin-bottom:10px}
-td a{display:inline-block;margin-bottom:5px}
-}
+.badge{display:inline-block;padding:3px 10px;border-radius:12px;font-size:.82rem;font-weight:bold}
+.badge-cloturee{background:#e74c3c;color:#fff}
+.badge-validee{background:#27ae60;color:#fff}
+.badge-creee{background:#f39c12;color:#fff}
+.badge-remboursee{background:#8e44ad;color:#fff}
+.badge-default{background:#95a5a6;color:#fff}
 </style>
-
 </head>
-
 <body>
 
 <div class="topbar">
-
-<h1 style="flex:1">Fiches de frais</h1>
-
-<a class="button" href="/dashboard">Dashboard</a>
-
-<a class="button" href="/fichefrais/create">Créer une fiche</a>
-
-<a class="button" href="/logout">Déconnexion</a>
-
+  <h1><?= htmlspecialchars($title ?? 'Mes fiches de frais') ?></h1>
+  <a class="button" href="<?= BASE_URL ?>dashboard/visiteur">Dashboard</a>
+  <a class="button" href="<?= BASE_URL ?>fichefrais/create">Nouvelle fiche</a>
+  <a class="button" href="<?= BASE_URL ?>logout">Déconnexion</a>
 </div>
 
-<?php if(empty($fiches)): ?>
+<?php if (!empty($_SESSION['flash'])): ?>
+  <div class="flash"><?= htmlspecialchars($_SESSION['flash']) ?></div>
+  <?php unset($_SESSION['flash']); ?>
+<?php endif; ?>
 
-<p>Aucune fiche trouvée.</p>
-
+<?php if (empty($fiches)): ?>
+  <p>Vous n'avez aucune fiche de frais pour le moment.</p>
 <?php else: ?>
 
 <table>
-
-<thead>
-<tr>
-<th>Visiteur</th>
-<th>Mois</th>
-<th>Justificatifs</th>
-<th>Montant</th>
-<th>Etat</th>
-<th>Actions</th>
-</tr>
-</thead>
-
-<tbody>
-
-<?php foreach($fiches as $f): ?>
-
-<tr>
-
-<td><?= htmlspecialchars($f['IDvisiteur'] ?? '') ?></td>
-
-<td>
-
-<?php
-$mois = $f['mois'] ?? '';
-$moisAffichage = substr($mois,4,2).'/'.substr($mois,0,4);
-?>
-
-<?= htmlspecialchars($moisAffichage) ?>
-
-</td>
-
-<td><?= htmlspecialchars($f['nbrJustificatifs'] ?? '') ?></td>
-
-<td><?= htmlspecialchars($f['montantValide'] ?? '') ?> €</td>
-
-<td><?= htmlspecialchars($f['etat'] ?? '') ?></td>
-
-<td>
-
-<a class="button"
-href="/fichefrais/<?= $f['IDvisiteur'] ?>/<?= $f['mois'] ?>">
-Voir
-</a>
-
-<a class="button"
-href="/fichefrais/<?= $f['IDvisiteur'] ?>/<?= $f['mois'] ?>/update">
-Modifier
-</a>
-
-<form method="post"
-action="/fichefrais/<?= $f['IDvisiteur'] ?>/<?= $f['mois'] ?>/delete"
-style="display:inline"
-onsubmit="return confirm('Supprimer cette fiche ?');">
-
-<button type="submit">Supprimer</button>
-
-</form>
-
-</td>
-
-</tr>
-
-<?php endforeach ?>
-
-</tbody>
-
+  <thead>
+    <tr>
+      <th>Mois</th>
+      <th>Justificatifs</th>
+      <th>Montant validé</th>
+      <th>État</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+  <?php foreach ($fiches as $f):
+      $moisStr = (string)($f['mois'] ?? '');
+      $moisAff = strlen($moisStr) === 6 ? substr($moisStr,4,2).'/'.substr($moisStr,0,4) : $moisStr;
+      $etat    = $f['etat'] ?? '';
+      $cloture = strtolower(trim($etat)) === 'clôturée';
+      $valide = strtolower(trim($etat)) === 'validée';
+     
+      $badgeClass = match(strtolower(trim($etat))) {
+          'clôturée'   => 'badge-cloturee',
+          'validée'    => 'badge-validee',
+          'créé','créée' => 'badge-creee',
+          'remboursée' => 'badge-remboursee',
+          default      => 'badge-default',
+      };
+  ?>
+    <tr>
+      <td><?= htmlspecialchars($moisAff) ?></td>
+      <td><?= htmlspecialchars($f['nbrJustificatifs'] ?? '') ?></td>
+      <td><?= number_format((float)($f['montantValide'] ?? 0), 2, ',', ' ') ?> €</td>
+      <td><span class="badge <?= $badgeClass ?>"><?= htmlspecialchars($etat) ?></span></td>
+      <td>
+        <a class="button"
+          href="<?= BASE_URL ?>fichefrais/<?= $f['IDvisiteur'] ?>/<?= $f['mois'] ?>">
+            Voir
+        </a>
+        <?php if (!$cloture && !$valide ): ?>
+          <a class="button" href="/fichefrais/<?= $f['IDvisiteur'] ?>/<?= $f['mois'] ?>/update">Modifier</a>
+          <form method="post"
+                action="<?= BASE_URL ?>fichefrais/<?= $f['IDvisiteur'] ?>/<?= $f['mois'] ?>/delete"
+                style="display:inline"
+                onsubmit="return confirm('Supprimer cette fiche ?');">
+            <button type="submit" style="background:#e74c3c">Supprimer</button>
+          </form>
+        <?php else: ?>
+          <span style="color:#e74c3c;font-weight:bold;margin-left:8px">🔒 consultation uniquement</span>
+        <?php endif; ?>
+      </td>
+    </tr>
+  <?php endforeach; ?>
+  </tbody>
 </table>
 
-<?php endif ?>
-
+<?php endif; ?>
 </body>
 </html>

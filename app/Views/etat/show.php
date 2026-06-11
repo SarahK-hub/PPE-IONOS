@@ -55,10 +55,10 @@ td a{display:inline-block;margin-bottom:5px}
             <p><strong>ID :</strong> <?= htmlspecialchars($etat['id']) ?></p>
             <p><strong>Libellé :</strong> <?= htmlspecialchars($etat['libelle']) ?></p>
         </div>
-        <a class="button" href="/etat">⬅ Retour à la liste</a>
+        <a class="button" href="<?= BASE_URL ?>/index.php/etat">⬅ Retour à la liste</a>
     <?php else: ?>
         <p>État introuvable.</p>
-        <a class="button" href="../etat">Retour à la liste</a>
+        <a class="button" href="/index.php/etat">Retour à la liste</a>
     <?php endif; ?>
 </body>
 </html>

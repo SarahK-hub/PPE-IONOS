@@ -60,7 +60,7 @@ td a{display:inline-block;margin-bottom:5px}
         </div>
     <?php endif; ?>
 
-    <form method="post" action="/etat/<?= $etat['id'] ?>/update">
+    <form method="post" action="<?= BASE_URL ?>/index.php/etat/<?= $etat['id'] ?>/update">
         <div class="field">
             <label for="libelle">Libellé</label>
             <input
@@ -78,7 +78,7 @@ td a{display:inline-block;margin-bottom:5px}
         </div>
 
         <button type="submit">Enregistrer</button>
-        <a href="/etat">Annuler</a>
+        <a href="<?= BASE_URL ?>/index.php/etat">Annuler</a>
     </form>
 
 </body>

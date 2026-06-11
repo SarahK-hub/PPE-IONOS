@@ -56,7 +56,7 @@ td a{display:inline-block;margin-bottom:5px}
             <p><strong>montant :</strong> <?= htmlspecialchars($fraisforfait['montant']) ?></p>
         
         </div>
-       <a class="button" href="/fraisforfait">⬅ Retour à la liste</a>
+       <a class="button" href="<?= BASE_URL ?>fraisforfait">⬅ Retour à la liste</a>
     <?php else: ?>
         <p>Frais forfait introuvable.</p>
         <a class="button" href="../fraisforfait">Retour à la liste</a>

@@ -1,11 +1,30 @@
-<?php
-$e = fn($s)=>htmlspecialchars((string)$s, ENT_QUOTES|ENT_SUBSTITUTE, 'UTF-8');
-?>
-<h2>Connexion</h2>
-<?php if (!empty($message)): ?><p style="color:red"><?= $e($message) ?></p><?php endif; ?>
-<form method="post" action="login">
-  <label>Utilisateur <input name="username" required></label><br>
-  <label>Mot de passe <input type="password" name="password" required></label><br>
-  <input type="hidden" name="csrf" value="<?= $e($csrf) ?>">
-  <button>Se connecter</button>
-</form>
+ 
+<div class="login-box">
+ <div class="login-wrapper">
+    <img src="<?= BASE_URL ?>/logo-gsb.png" alt="GSB">
+ </div>
+    <h1>Connexion GSB</h1>
+
+    <?php if (!empty($message)): ?>
+        <div class="flash">
+            <?= htmlspecialchars($message) ?>
+        </div>
+    <?php endif; ?>
+     
+                   
+
+                    
+    <form method="post" action="<?= BASE_URL ?>/index.php/login">
+
+        <input type="hidden" name="csrf" value="<?= $csrf ?>">
+
+        <input type="text" name="username" placeholder="Utilisateur" required>
+
+        <input type="password" name="password" placeholder="Mot de passe" required>
+
+        <button type="submit">Se connecter</button>
+
+    </form>
+
+</div>
+  </div>

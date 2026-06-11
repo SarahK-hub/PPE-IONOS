@@ -6,7 +6,7 @@ final class fraisforfait{
     public static function findAll(): array
     {
         $pdo = Database::get();
-        $st  = $pdo->query('SELECT id, libelle,montant FROM fraisforfait ');
+        $st  = $pdo->query('SELECT ID, libelle, montant FROM fraisforfait ');
         return $st->fetchAll(); // FETCH_ASSOC déjà par défaut via Database
     }
     public static function findById(int $id): ?array
