@@ -1,7 +1,7 @@
  
 <div class="login-box">
  <div class="login-wrapper">
-    <img src="<?= BASE_URL ?>/logo-gsb.png" alt="GSB">
+    <img src="/logo-gsb.png" alt="GSB">
  </div>
     <h1>Connexion GSB</h1>
 
