@@ -34,7 +34,7 @@ final class AuthController extends Controller {
 
         if (!$user || !password_verify($password, $user['mdp'])) {
             $_SESSION['flash'] = 'Login ou mot de passe incorrect';
-            $this->redirect('//index.php');
+            $this->redirect('/index.php');
         }
 
         // SESSION

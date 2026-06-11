@@ -304,7 +304,7 @@ td, th {
     <a href="/index.php/logout" style="margin-left:auto;color:#e74c3c;font-weight:bold;">⎋ Déconnexion</a>
 
 <?php else: ?>
-
+    <a href="/index.php/etat">etat</a>
     <a href="/index.php/fichefrais">Suivi fiches</a>
     <a href="/index.php/visiteur">Visiteurs</a>
     <a href="/index.php/logout" style="margin-left:auto;color:#e74c3c;font-weight:bold;">⎋ Déconnexion</a>

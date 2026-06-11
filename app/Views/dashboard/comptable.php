@@ -6,9 +6,5 @@
          Suivi des fiches
     </a>
 </div>
-<div class="cards">
-    <a class="card" href="/index.php/etat">
-         Suivi des etats
-    </a>
-</div>
+
 </div>
