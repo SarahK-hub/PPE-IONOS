@@ -8,7 +8,7 @@ final class fraisforfaitController extends Controller
 {
     public function index(): void
     {
-        if (empty($_SESSION['uid'])) {
+        if (empty($_SESSION['user'])) {
             $this->redirect('/');
         }
 
@@ -33,7 +33,7 @@ final class fraisforfaitController extends Controller
 
     public function show($id): void
     {
-        if (empty($_SESSION['uid'])) $this->redirect('/');
+        if (empty($_SESSION['user'])) $this->redirect('/');
 
         $id = (int)$id;
 
@@ -59,7 +59,7 @@ final class fraisforfaitController extends Controller
 }
 public function create(): void
     {
-        if (empty($_SESSION['uid'])) $this->redirect('/');
+        if (empty($_SESSION['user'])) $this->redirect('/');
 
         $this->render('fraisforfait/create', [
             'title'   => 'Créer un frais forfait',
@@ -77,7 +77,7 @@ public function create(): void
 
     public function store(): void
 {
-    if (empty($_SESSION['uid'])) $this->redirect('/');
+    if (empty($_SESSION['user'])) $this->redirect('/');
 
     $libelle = trim($_POST['libelle'] ?? '');
     $montant = trim($_POST['montant'] ?? '');
@@ -115,7 +115,7 @@ public function create(): void
 }
  public function update(int $id): void
 {
-    if (empty($_SESSION['uid'])) {
+    if (empty($_SESSION['user'])) {
         $this->redirect('/');
     }
 
@@ -144,7 +144,7 @@ public function create(): void
     
     public function save(int $id): void
     {
-        if (empty($_SESSION['uid'])) {
+        if (empty($_SESSION['user'])) {
             $this->redirect('/');
         }
 
@@ -178,7 +178,7 @@ public function create(): void
     }
      public function delete(int $id): void
 {
-        if (empty($_SESSION['uid'])) {
+        if (empty($_SESSION['user'])) {
         $this->redirect('/');
     }
 

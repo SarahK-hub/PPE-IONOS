@@ -9,7 +9,7 @@ final class frais_hors_forfaitController extends Controller
 {
     public function index(): void
     {
-        if (empty($_SESSION['uid'])) {
+        if (empty($_SESSION['user'])) {
             $this->redirect('/');
         }
 
@@ -33,7 +33,7 @@ final class frais_hors_forfaitController extends Controller
 
     public function show($id): void
     {
-        if (empty($_SESSION['uid'])) $this->redirect('/');
+        if (empty($_SESSION['user'])) $this->redirect('/');
 
         $id = (int)$id;
 
@@ -59,7 +59,7 @@ final class frais_hors_forfaitController extends Controller
 }
 public function create(): void
     {
-        if (empty($_SESSION['uid'])) $this->redirect('/');
+        if (empty($_SESSION['user'])) $this->redirect('/');
 
         $this->render('frais_hors_forfait/create', [
             'title'   => 'Créer un frais hors forfait',
@@ -78,7 +78,7 @@ public function create(): void
 
     public function store(): void
 {
-    if (empty($_SESSION['uid'])) $this->redirect('/');
+    if (empty($_SESSION['user'])) $this->redirect('/');
 
     $date_frais    = trim($_POST['date_frais'] ?? '');
     $libelle = trim($_POST['libelle'] ?? '');
@@ -111,7 +111,7 @@ public function create(): void
 
  public function update(int $id): void
 {
-    if (empty($_SESSION['uid'])) {
+    if (empty($_SESSION['user'])) {
         $this->redirect('/');
     }
 
@@ -141,7 +141,7 @@ public function create(): void
     
     public function save(int $id): void
     {
-        if (empty($_SESSION['uid'])) {
+        if (empty($_SESSION['user'])) {
             $this->redirect('/');
         }
         $date_frais = trim($_POST['date_frais'] ?? '');
@@ -180,7 +180,7 @@ public function create(): void
     }
      public function delete(int $id): void
 {
-        if (empty($_SESSION['uid'])) {
+        if (empty($_SESSION['user'])) {
         $this->redirect('/');
     }
 
@@ -196,7 +196,7 @@ public function create(): void
  
 public function updateMontant(int $id): void
 {
-    if (empty($_SESSION['uid'])) {
+    if (empty($_SESSION['user'])) {
         $this->redirect('/');
     }
 

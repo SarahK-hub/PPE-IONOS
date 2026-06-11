@@ -8,7 +8,7 @@ final class EtatController extends Controller
 {
     public function index(): void
     {
-        if (empty($_SESSION['uid'])) {
+        if (empty($_SESSION['user'])) {
             $this->redirect('/index.php');
         }
 
@@ -32,7 +32,7 @@ final class EtatController extends Controller
 
     public function show($id): void
     {
-        if (empty($_SESSION['uid'])) $this->redirect('/index.php');
+        if (empty($_SESSION['user'])) $this->redirect('/index.php');
 
         $id = (int)$id;
 
@@ -59,7 +59,7 @@ final class EtatController extends Controller
 
  public function create(): void
     {
-        if (empty($_SESSION['uid'])) $this->redirect('/index.php');
+        if (empty($_SESSION['user'])) $this->redirect('/index.php');
 
         $this->render('etat/create', [
             'title'   => 'Créer un état',
@@ -73,7 +73,7 @@ final class EtatController extends Controller
 
     public function store(): void
 {
-    if (empty($_SESSION['uid'])) $this->redirect('/index.php');
+    if (empty($_SESSION['user'])) $this->redirect('/index.php');
 
     $libelle = trim($_POST['libelle'] ?? '');
 
@@ -103,7 +103,7 @@ final class EtatController extends Controller
 }
    public function update(int $id): void
 {
-    if (empty($_SESSION['uid'])) {
+    if (empty($_SESSION['user'])) {
         $this->redirect('/index.php');
     }
 
@@ -128,7 +128,7 @@ final class EtatController extends Controller
     
     public function save(int $id): void
     {
-        if (empty($_SESSION['uid'])) {
+        if (empty($_SESSION['user'])) {
             $this->redirect('/index.php');
         }
 
@@ -160,7 +160,7 @@ final class EtatController extends Controller
     }
    public function delete(int $id): void
 {
-    if (empty($_SESSION['uid'])) {
+    if (empty($_SESSION['user'])) {
         $this->redirect('/index.php');
     }
 
