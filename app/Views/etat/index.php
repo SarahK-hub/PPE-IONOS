@@ -50,7 +50,7 @@ td a{display:inline-block;margin-bottom:5px}
         <h1 style="margin:0;">Liste des États</h1>
         <a class="button" href="/index.php/dashboard">Dashboard</a>
         <a class="button" href="/index.php/logout">Se déconnecter</a>
-       <a class="button" href="<?= BASE_URL ?>/index.php/etat/create">Inserer</a>
+       <a class="button" href="/index.php/etat/create">Inserer</a>
        
          
     </div>
@@ -76,12 +76,12 @@ td a{display:inline-block;margin-bottom:5px}
         <td><?= htmlspecialchars((string)$etat['id']) ?></td>
         <td><?= htmlspecialchars((string)$etat['libelle']) ?></td>
         <td>
-           <a class="button" href="<?= BASE_URL ?>/index.php/etat/<?= $etat['id'] ?>">Voir</a>
-           <a class="button" href="<?= BASE_URL ?>/index.php/etat/<?= $etat['id'] ?>/update">Modifier</a>
+           <a class="button" href="/index.php/etat/<?= $etat['id'] ?>">Voir</a>
+           <a class="button" href="/index.php/etat/<?= $etat['id'] ?>/update">Modifier</a>
 
 
            <form method="post"
-                  action="<?= BASE_URL ?>/index.php/etat/<?= (int)$etat['id'] ?>/delete"
+                  action="/index.php/etat/<?= (int)$etat['id'] ?>/delete"
                   style="display:inline"
                   onsubmit="return confirm('Voulez-vous vraiment supprimer cet état ?');">
                 <button type="submit">Supprimer</button>

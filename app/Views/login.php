@@ -14,7 +14,7 @@
                    
 
                     
-    <form method="post" action="<?= BASE_URL ?>/index.php/login">
+    <form method="post" action="/index.php/login">
 
         <input type="hidden" name="csrf" value="<?= $csrf ?>">
 

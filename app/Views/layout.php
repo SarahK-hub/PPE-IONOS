@@ -287,7 +287,7 @@ td, th {
 <?php if (!empty($_SESSION['user'])): ?>
 <div class="header">
     <div class="header-left">
-        <img src="<?= BASE_URL ?>/logo-gsb.png" alt="GSB">
+        <img src="/logo-gsb.png" alt="GSB">
         <span>GSB - Gestion des frais</span>
     </div>
 </div>
@@ -299,15 +299,15 @@ td, th {
 
 <?php if ($_SESSION['user']['roles'] === 'visiteur'): ?>
 
-    <a href="<?= BASE_URL ?>/index.php/fichefrais/create">Nouvelle fiche</a>
-    <a href="<?= BASE_URL ?>/index.php/fichefrais">Mes fiches</a>
-    <a href="<?= BASE_URL ?>/index.php/logout" style="margin-left:auto;color:#e74c3c;font-weight:bold;">⎋ Déconnexion</a>
+    <a href="/index.php/fichefrais/create">Nouvelle fiche</a>
+    <a href="/index.php/fichefrais">Mes fiches</a>
+    <a href="/index.php/logout" style="margin-left:auto;color:#e74c3c;font-weight:bold;">⎋ Déconnexion</a>
 
 <?php else: ?>
 
-    <a href="<?= BASE_URL ?>/index.php/fichefrais">Suivi fiches</a>
-    <a href="<?= BASE_URL ?>/index.php/visiteur">Visiteurs</a>
-    <a href="<?= BASE_URL ?>/index.php/logout" style="margin-left:auto;color:#e74c3c;font-weight:bold;">⎋ Déconnexion</a>
+    <a href="/index.php/fichefrais">Suivi fiches</a>
+    <a href="/index.php/visiteur">Visiteurs</a>
+    <a href="/index.php/logout" style="margin-left:auto;color:#e74c3c;font-weight:bold;">⎋ Déconnexion</a>
 
 <?php endif; ?>
 
