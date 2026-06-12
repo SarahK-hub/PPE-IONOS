@@ -169,7 +169,7 @@ tbody tr.selected td{color:#fff}
 
         <a
             class="button"
-            href="<?= BASE_URL ?>fichefrais/<?= $f['IDvisiteur'] ?>/<?= $f['mois'] ?>"
+            href="/index.php/fichefrais/<?= $f['IDvisiteur'] ?>/<?= $f['mois'] ?>"
         >
             Voir
         </a>

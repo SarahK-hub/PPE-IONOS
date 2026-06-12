@@ -16,7 +16,7 @@ final class fichefraisController extends Controller
     // ─────────────────────────────────────────────
     public function index(): void
     {
-        if (empty($_SESSION['user'])) $this->redirect('/');
+        if (empty($_SESSION['user'])) $this->redirect('/index.php');
 
         $role = $_SESSION['user']['roles'];
 
@@ -75,7 +75,7 @@ final class fichefraisController extends Controller
 public function show(string $idVisiteur, string $mois): void
 {
     if (empty($_SESSION['user'])) {
-        $this->redirect('/');
+        $this->redirect('/index.php');
     }
 
     $role = $_SESSION['user']['roles'];
@@ -85,14 +85,14 @@ public function show(string $idVisiteur, string $mois): void
         && (int)$idVisiteur !== (int)$_SESSION['user']['id']
     ) {
         $_SESSION['flash'] = 'Accès refusé.';
-        $this->redirect('/fichefrais');
+        $this->redirect('/index.php/fichefrais');
     }
 
     $fiche = fichefrais::findById($idVisiteur, $mois);
 
     if (!$fiche) {
         $_SESSION['flash'] = 'Fiche introuvable.';
-        $this->redirect('/fichefrais');
+        $this->redirect('/index.php/fichefrais');
     }
 
     $fraisForfait = fichefrais::getFraisForfait($idVisiteur, $mois);
@@ -130,11 +130,11 @@ public function show(string $idVisiteur, string $mois): void
 public function create(): void
 {
     if (empty($_SESSION['user'])) {
-        $this->redirect('/');
+        $this->redirect('/index.php');
     }
 
     if ($_SESSION['user']['roles'] !== 'visiteur') {
-        $this->redirect('/fichefrais');
+        $this->redirect('/index.php/fichefrais');
     }
 
     $this->render('fichefrais/create', [
@@ -153,11 +153,11 @@ public function create(): void
 public function store(): void
 {
     if (empty($_SESSION['user'])) {
-        $this->redirect('/');
+        $this->redirect('/index.php');
     }
 
     if ($_SESSION['user']['roles'] !== 'visiteur') {
-        $this->redirect('/fichefrais');
+        $this->redirect('/index.php/fichefrais');
     }
 
     $idVisiteur = (int) $_SESSION['user']['id'];
@@ -167,7 +167,7 @@ public function store(): void
     if ($mois === '') {
 
         $_SESSION['flash'] = 'Le mois est obligatoire.';
-        $this->redirect('/fichefrais/create');
+        $this->redirect('/index.php/fichefrais/create');
     }
 
     // Vérification doublon
@@ -176,7 +176,7 @@ public function store(): void
         $_SESSION['flash'] =
             'Une fiche existe déjà pour ce mois.';
 
-        $this->redirect('/fichefrais/create');
+        $this->redirect('/index.php/fichefrais/create');
     }
 
     // Etat "Créé"
@@ -220,7 +220,7 @@ if ($okFiche && $okForfait) {
         'Erreur lors de la création de la fiche.';
 }
 
-$this->redirect('/fichefrais');
+$this->redirect('/index.php/fichefrais');
 }
 
     // ─────────────────────────────────────────────
@@ -232,7 +232,7 @@ $this->redirect('/fichefrais');
 public function update(string $idVisiteur, string $mois): void
 {
     if (empty($_SESSION['user'])) {
-        $this->redirect('/');
+        $this->redirect('/index.php');
     }
 
     $role = $_SESSION['user']['roles'];
@@ -241,14 +241,14 @@ public function update(string $idVisiteur, string $mois): void
         $role === 'visiteur'
         && (int)$idVisiteur !== (int)$_SESSION['user']['id']
     ) {
-        $this->redirect('/fichefrais');
+        $this->redirect('/index.php/fichefrais');
     }
 
     $fiche = fichefrais::findById($idVisiteur, $mois);
 
     if (!$fiche) {
         $_SESSION['flash'] = 'Fiche introuvable.';
-        $this->redirect('/fichefrais');
+        $this->redirect('/index.php/fichefrais');
     }
 
     $estCloturee = false;
@@ -269,7 +269,7 @@ public function update(string $idVisiteur, string $mois): void
 
     if ($estCloturee) {
         $_SESSION['flash'] = 'Cette fiche est clôturée.';
-        $this->redirect('/fichefrais/' . $idVisiteur . '/' . $mois);
+        $this->redirect('/index.php/fichefrais/' . $idVisiteur . '/' . $mois);
     }
 
     $this->render('fichefrais/update', [
@@ -286,13 +286,13 @@ public function update(string $idVisiteur, string $mois): void
 public function save(string $idVisiteur, string $mois): void
 {
     if (empty($_SESSION['user'])) {
-        $this->redirect('/');
+        $this->redirect('/index.php');
     }
 
     $fiche = fichefrais::findById($idVisiteur, $mois);
 
     if (!$fiche) {
-        $this->redirect('/fichefrais');
+        $this->redirect('/index.php/fichefrais');
     }
 
     $role = $_SESSION['user']['roles'];
@@ -308,7 +308,7 @@ public function save(string $idVisiteur, string $mois): void
         $_SESSION['flash'] =
             "Cette fiche n'est plus modifiable.";
 
-        $this->redirect("/fichefrais/$idVisiteur/$mois");
+        $this->redirect("/index.php/fichefrais/$idVisiteur/$mois");
         return;
     }
 
@@ -320,7 +320,7 @@ public function save(string $idVisiteur, string $mois): void
         $_SESSION['flash'] =
             "Libellé obligatoire.";
 
-        $this->redirect("/fichefrais/$idVisiteur/$mois/update");
+        $this->redirect("/index.php/fichefrais/$idVisiteur/$mois/update");
         return;
     }
 
@@ -333,7 +333,7 @@ public function save(string $idVisiteur, string $mois): void
     $_SESSION['flash'] =
         "Fiche mise à jour.";
 
-    $this->redirect("/fichefrais/$idVisiteur/$mois");
+    $this->redirect("/index.php/fichefrais/$idVisiteur/$mois");
     return;
 }
 
@@ -347,11 +347,11 @@ public function save(string $idVisiteur, string $mois): void
         fichefrais::updateEtatOnly($idVisiteur, $mois, $idEtat);
 
         $_SESSION['flash'] = "État mis à jour.";
-        $this->redirect("/fichefrais/$idVisiteur/$mois");
+        $this->redirect("/index.php/fichefrais/$idVisiteur/$mois");
         return;
     }
 
-    $this->redirect('/fichefrais');
+    $this->redirect('/index.php/fichefrais');
 }
   // ─────────────────────────────────────────────
 // DELETE
@@ -359,13 +359,13 @@ public function save(string $idVisiteur, string $mois): void
 public function delete(string $idVisiteur, string $mois): void
 {
     if (empty($_SESSION['user'])) {
-        $this->redirect('/');
+        $this->redirect('/index.php');
     }
 
     $fiche = fichefrais::findById($idVisiteur, $mois);
 
     if (!$fiche) {
-        $this->redirect('/fichefrais');
+        $this->redirect('/index.php/fichefrais');
     }
 
     $estCloturee = false;
@@ -386,14 +386,14 @@ public function delete(string $idVisiteur, string $mois): void
 
     if ($estCloturee) {
         $_SESSION['flash'] = 'Cette fiche est clôturée.';
-        $this->redirect('/fichefrais/' . $idVisiteur . '/' . $mois);
+        $this->redirect('/index.php/fichefrais/' . $idVisiteur . '/' . $mois);
     }
 
     fichefrais::delete($idVisiteur, $mois);
 
     $_SESSION['flash'] = 'Fiche supprimée.';
 
-    $this->redirect('/fichefrais');
+    $this->redirect('/index.php/fichefrais');
 }
 
   public function updateFraisHorsForfait(
@@ -403,13 +403,13 @@ public function delete(string $idVisiteur, string $mois): void
 ): void
 {
     if (empty($_SESSION['user'])) {
-        $this->redirect('/');
+        $this->redirect('/index.php');
     }
 
     $fiche = fichefrais::findById($idVisiteur, $mois);
 
     if (!$fiche) {
-        $this->redirect('/fichefrais');
+        $this->redirect('/index.php/fichefrais');
     }
 
     $role = $_SESSION['user']['roles'];
@@ -424,7 +424,7 @@ public function delete(string $idVisiteur, string $mois): void
         $_SESSION['flash'] =
             "Cette fiche est verrouillée.";
 
-        $this->redirect("/fichefrais/$idVisiteur/$mois");
+        $this->redirect("/index.php/fichefrais/$idVisiteur/$mois");
     }
 
     // ==========================
@@ -437,7 +437,7 @@ public function delete(string $idVisiteur, string $mois): void
 
             $_SESSION['flash'] = "Accès refusé.";
 
-            $this->redirect('/fichefrais');
+            $this->redirect('/index.php/fichefrais');
         }
 
         // uniquement état Créé
@@ -446,7 +446,7 @@ public function delete(string $idVisiteur, string $mois): void
             $_SESSION['flash'] =
                 "Modification impossible.";
 
-            $this->redirect("/fichefrais/$idVisiteur/$mois");
+            $this->redirect("/index.php/fichefrais/$idVisiteur/$mois");
         }
 
         $montant = (float)($_POST['montant'] ?? 0);
@@ -467,7 +467,7 @@ public function delete(string $idVisiteur, string $mois): void
         $_SESSION['flash'] =
             "Montant modifié.";
 
-        $this->redirect("/fichefrais/$idVisiteur/$mois");
+        $this->redirect("/index.php/fichefrais/$idVisiteur/$mois");
     }
 
     // ==========================
@@ -501,9 +501,9 @@ public function delete(string $idVisiteur, string $mois): void
         $_SESSION['flash'] =
             "Frais hors forfait mis à jour.";
 
-        $this->redirect("/fichefrais/$idVisiteur/$mois");
+        $this->redirect("/index.php/fichefrais/$idVisiteur/$mois");
     }
 
-    $this->redirect('/fichefrais');
+    $this->redirect('/index.php/fichefrais');
 }
 }

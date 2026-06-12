@@ -33,9 +33,9 @@ tr:hover{background:#d6eaf8}
 
 <div class="topbar">
   <h1><?= htmlspecialchars($title ?? 'Mes fiches de frais') ?></h1>
-  <a class="button" href="<?= BASE_URL ?>dashboard/visiteur">Dashboard</a>
-  <a class="button" href="<?= BASE_URL ?>fichefrais/create">Nouvelle fiche</a>
-  <a class="button" href="<?= BASE_URL ?>logout">Déconnexion</a>
+  <a class="button" href="/index.php/dashboard/visiteur">Dashboard</a>
+  <a class="button" href="/index.php/fichefrais/create">Nouvelle fiche</a>
+  <a class="button" href="/index.php/logout">Déconnexion</a>
 </div>
 
 <?php if (!empty($_SESSION['flash'])): ?>
@@ -80,13 +80,13 @@ tr:hover{background:#d6eaf8}
       <td><span class="badge <?= $badgeClass ?>"><?= htmlspecialchars($etat) ?></span></td>
       <td>
         <a class="button"
-          href="<?= BASE_URL ?>fichefrais/<?= $f['IDvisiteur'] ?>/<?= $f['mois'] ?>">
+          href="/index.php/fichefrais/<?= $f['IDvisiteur'] ?>/<?= $f['mois'] ?>">
             Voir
         </a>
         <?php if (!$cloture && !$valide ): ?>
           <a class="button" href="/fichefrais/<?= $f['IDvisiteur'] ?>/<?= $f['mois'] ?>/update">Modifier</a>
           <form method="post"
-                action="<?= BASE_URL ?>fichefrais/<?= $f['IDvisiteur'] ?>/<?= $f['mois'] ?>/delete"
+                action="/index.php/fichefrais/<?= $f['IDvisiteur'] ?>/<?= $f['mois'] ?>/delete"
                 style="display:inline"
                 onsubmit="return confirm('Supprimer cette fiche ?');">
             <button type="submit" style="background:#e74c3c">Supprimer</button>

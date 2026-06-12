@@ -51,7 +51,7 @@ td a{display:inline-block;margin-bottom:5px}
 <h1>Créer une fiche</h1>
 
 
-<form method="post" action="<?= BASE_URL ?>fichefrais/store">
+<form method="post" action="/index.php/fichefrais/store">
 
 
 <label>Mois</label>

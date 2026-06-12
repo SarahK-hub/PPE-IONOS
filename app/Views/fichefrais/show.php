@@ -48,12 +48,12 @@ tfoot td{font-weight:bold;background:#ecf0f1}
 
 <?php if (!$readonly): ?>
     <a class="btn btn-edit"
-       href="<?= BASE_URL ?>fichefrais/<?= $fiche['IDvisiteur'] ?>/<?= $fiche['mois'] ?>/update">
+       href="/index.php/fichefrais/<?= $fiche['IDvisiteur'] ?>/<?= $fiche['mois'] ?>/update">
         Modifier
     </a>
 
     <form method="post"
-          action="<?= BASE_URL ?>fichefrais/<?= $fiche['IDvisiteur'] ?>/<?= $fiche['mois'] ?>/delete"
+          action="/index.php/fichefrais/<?= $fiche['IDvisiteur'] ?>/<?= $fiche['mois'] ?>/delete"
           style="display:inline"
           onsubmit="return confirm('Supprimer cette fiche ?');">
 
@@ -63,7 +63,7 @@ tfoot td{font-weight:bold;background:#ecf0f1}
     <span class="locked">🔒 Consultation uniquement</span>
 <?php endif; ?>
 
-<a class="btn btn-back" href="<?= BASE_URL ?>fichefrais">← Retour</a>
+<a class="btn btn-back" href="/index.php/fichefrais">← Retour</a>
 
 </div>
 
@@ -150,7 +150,7 @@ tfoot td{font-weight:bold;background:#ecf0f1}
                 <!-- FORM CORRIGÉ SANS TOUCHER AU DESIGN -->
                 <td>
                     <form method="post"
-                          action="<?= BASE_URL ?>fichefrais/<?= $fiche['IDvisiteur'] ?>/<?= $fiche['mois'] ?>/horsforfait/<?= $id ?>/update">
+                          action="/index.php/fichefrais/<?= $fiche['IDvisiteur'] ?>/<?= $fiche['mois'] ?>/horsforfait/<?= $id ?>/update">
                 </td>
 
                 <td>
