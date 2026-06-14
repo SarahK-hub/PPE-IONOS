@@ -37,13 +37,13 @@ a.button,button{width:100%;margin-bottom:6px}
 
 <div class="topbar">
     <h1>Liste des visiteurs</h1>
-    <a class="button" href="<?= BASE_URL ?>dashboard">Dashboard</a>
-    <a class="button" href="<?= BASE_URL ?>logout">Se déconnecter</a>
-    <a class="button" href="<?= BASE_URL ?>visiteur/create">Créer un visiteur</a>
+    <a class="button" href="/index.php/dashboard">Dashboard</a>
+    <a class="button" href="/index.php/logout">Se déconnecter</a>
+    <a class="button" href="/index.php/visiteur/create">Créer un visiteur</a>
 </div>
 
 <!-- Recherche -->
-<form method="get" action="<?= BASE_URL ?>visiteur" style="margin-bottom:16px;">
+<form method="get" action="/index.php/visiteur" style="margin-bottom:16px;">
     <input
         type="text"
         name="q"
@@ -79,10 +79,10 @@ a.button,button{width:100%;margin-bottom:6px}
                 <td><?= htmlspecialchars($v['PRENOM']) ?></td>
                 <td><?= htmlspecialchars($v['roles']) ?></td>
                 <td>
-                    <a class="button" href="<?= BASE_URL ?>visiteur/<?= (int)$v['ID'] ?>/update">Modifier</a>
+                    <a class="button" href="/index.php/visiteur/<?= (int)$v['ID'] ?>/update">Modifier</a>
 
                     <form method="post"
-                          action="<?= BASE_URL ?>visiteur/<?= (int)$v['ID'] ?>/delete"
+                          action="/index.php/visiteur/<?= (int)$v['ID'] ?>/delete"
                           style="display:inline"
                           onsubmit="return confirm('Supprimer ce visiteur ?');">
                         <button type="submit">Supprimer</button>

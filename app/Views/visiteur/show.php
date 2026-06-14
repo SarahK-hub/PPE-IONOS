@@ -56,10 +56,10 @@ td a{display:inline-block;margin-bottom:5px}
             
         
         </div>
-        <a class="button" href="../visiteur">⬅ Retour à la liste</a>
+        <a class="button" href="/index.php/visiteur">⬅ Retour à la liste</a>
     <?php else: ?>
         <p>visiteur introuvable.</p>
-        <a class="button" href="../visiteur">Retour à la liste</a>
+        <a class="button" href="/index.php/visiteur">Retour à la liste</a>
     <?php endif; ?>
 </body>
 </html>

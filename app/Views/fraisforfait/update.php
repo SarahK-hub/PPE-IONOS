@@ -60,7 +60,7 @@ td a{display:inline-block;margin-bottom:5px}
     <?php endif; ?>
 
       <form method="post"
-        action="<?= BASE_URL ?>fichefrais/<?= $fiche['IDvisiteur'] ?>/<?= $fiche['mois'] ?>/update">
+        action="/index.php/fichefrais/<?= $fiche['IDvisiteur'] ?>/<?= $fiche['mois'] ?>/update">
 
         <div class="field">
         <label>Nombre de justificatifs</label>
@@ -101,7 +101,7 @@ td a{display:inline-block;margin-bottom:5px}
         </div>
 
         <button type="submit">Enregistrer</button>
-        <a class="button" href="<?= BASE_URL ?>fichefrais">Annuler</a>
+        <a class="button" href="/index.php/fichefrais">Annuler</a>
 
                 
 

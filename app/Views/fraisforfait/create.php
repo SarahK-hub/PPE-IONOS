@@ -58,7 +58,7 @@ td a{display:inline-block;margin-bottom:5px}
         <?= htmlspecialchars($message, ENT_QUOTES, 'UTF-8'); ?>
     </div>
 <?php endif; ?>
-<form action="<?= BASE_URL ?>fraisforfait/store" method="post">
+<form action="/index.php/fraisforfait/store" method="post">
 
 
     <div class="field">
@@ -95,7 +95,7 @@ td a{display:inline-block;margin-bottom:5px}
     </div>
 
     <button type="submit">Enregistrer</button>
-    <a href="<?= BASE_URL ?>fraisforfait">Annuler</a>
+    <a href="/index.php/fraisforfait">Annuler</a>
 </form>
 
 </body>

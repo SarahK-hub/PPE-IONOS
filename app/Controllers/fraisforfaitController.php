@@ -9,7 +9,7 @@ final class fraisforfaitController extends Controller
     public function index(): void
     {
         if (empty($_SESSION['user'])) {
-            $this->redirect('/');
+            $this->redirect('/index.php');
         }
 
         try {
@@ -33,7 +33,7 @@ final class fraisforfaitController extends Controller
 
     public function show($id): void
     {
-        if (empty($_SESSION['user'])) $this->redirect('/');
+        if (empty($_SESSION['user'])) $this->redirect('/index.php');
 
         $id = (int)$id;
 
@@ -42,7 +42,7 @@ final class fraisforfaitController extends Controller
             if (!$fraisforfait) {
                 http_response_code(404);
                 $_SESSION['flash'] = 'frais forfait introuvable.';
-                $this->redirect('/fraisforfait');
+                $this->redirect('/index.php/fraisforfait');
             }
         } catch (\Throwable $e) {
             // error_log($e->getMessage()); // utile en debug
@@ -59,7 +59,7 @@ final class fraisforfaitController extends Controller
 }
 public function create(): void
     {
-        if (empty($_SESSION['user'])) $this->redirect('/');
+        if (empty($_SESSION['user'])) $this->redirect('/index.php');
 
         $this->render('fraisforfait/create', [
             'title'   => 'Créer un frais forfait',
@@ -77,7 +77,7 @@ public function create(): void
 
     public function store(): void
 {
-    if (empty($_SESSION['user'])) $this->redirect('/');
+    if (empty($_SESSION['user'])) $this->redirect('/index.php');
 
     $libelle = trim($_POST['libelle'] ?? '');
     $montant = trim($_POST['montant'] ?? '');
@@ -100,30 +100,30 @@ public function create(): void
         'montant' => $montant];
 
         $_SESSION['flash']  = 'Merci de corriger les erreurs du formulaire.';
-        $this->redirect('./fraisforfait/create');
+        $this->redirect('/index.php/fraisforfait/create');
     }
 
     try {
         $id=\Models\fraisforfait::create($libelle, (float)$montant);
         $_SESSION['flash'] = 'frais forfait créé avec succès.';
-        $this->redirect('./fraisforfait/'.$id );
+        $this->redirect('/index.php/fraisforfait/'.$id );
 
     } catch (\Throwable $e) {
         $_SESSION['flash'] = 'Impossible de créer le frais forfait.';
-        $this->redirect('./fraisforfait/create');
+        $this->redirect('/index.php/fraisforfait/create');
     }
 }
  public function update(int $id): void
 {
     if (empty($_SESSION['user'])) {
-        $this->redirect('/');
+        $this->redirect('/index.php');
     }
 
     $fraisforfait = fraisforfait::findById($id);
 
     if (!$fraisforfait) {
         $_SESSION['flash'] = 'frais forfait introuvable.';
-        $this->redirect('./fraisforfait');
+        $this->redirect('/index.php/fraisforfait');
     }
 
     $this->render('fraisforfait/update', [
@@ -145,7 +145,7 @@ public function create(): void
     public function save(int $id): void
     {
         if (empty($_SESSION['user'])) {
-            $this->redirect('/');
+            $this->redirect('/index.php');
         }
 
         $libelle = trim($_POST['libelle'] ?? '');
@@ -163,23 +163,23 @@ public function create(): void
             $_SESSION['old']    = ['libelle' => $libelle];
             $_SESSION['old']    = ['montant' => $montant];
             $_SESSION['flash']  = 'Merci de corriger les erreurs du formulaire.';
-            $this->redirect('./fraisforfait/' . $id . '/update');
+            $this->redirect('/index.php/fraisforfait/' . $id . '/update');
         }
 
         try {
             \Models\fraisforfait::update( $id,$libelle,$montant);
 
             $_SESSION['flash'] = 'frais forfait modifié avec succès.';
-            $this->redirect('./fraisforfait/' . $id);
+            $this->redirect('/index.php/fraisforfait/' . $id);
         } catch (\Throwable $e) {
             $_SESSION['flash'] = 'Impossible de modifier le frais forfait.';
-            $this->redirect('./fraisforfait/' . $id . '/update');
+            $this->redirect('/index.php/fraisforfait/' . $id . '/update');
         }
     }
      public function delete(int $id): void
 {
         if (empty($_SESSION['user'])) {
-        $this->redirect('/');
+        $this->redirect('/index.php');
     }
 
     try {
@@ -189,7 +189,7 @@ public function create(): void
         $_SESSION['flash'] = 'Impossible de supprimer le frais forfait.';
     }
 
-    $this->redirect('./fraisforfait');
+    $this->redirect('/index.php/fraisforfait');
 }
  
 

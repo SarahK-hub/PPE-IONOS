@@ -10,7 +10,7 @@ final class frais_hors_forfaitController extends Controller
     public function index(): void
     {
         if (empty($_SESSION['user'])) {
-            $this->redirect('/');
+            $this->redirect('/index.php');
         }
 
         try {
@@ -33,7 +33,7 @@ final class frais_hors_forfaitController extends Controller
 
     public function show($id): void
     {
-        if (empty($_SESSION['user'])) $this->redirect('/');
+        if (empty($_SESSION['user'])) $this->redirect('/index.php');
 
         $id = (int)$id;
 
@@ -42,7 +42,7 @@ final class frais_hors_forfaitController extends Controller
             if (!$frais_hors_forfait) {
                 http_response_code(404);
                 $_SESSION['flash'] = 'frais hors forfait introuvable.';
-                $this->redirect('/frais_hors_forfait');
+                $this->redirect('/index.php/frais_hors_forfait');
             }
         } catch (\Throwable $e) {
             // error_log($e->getMessage()); // utile en debug
@@ -59,7 +59,7 @@ final class frais_hors_forfaitController extends Controller
 }
 public function create(): void
     {
-        if (empty($_SESSION['user'])) $this->redirect('/');
+        if (empty($_SESSION['user'])) $this->redirect('/index.php');
 
         $this->render('frais_hors_forfait/create', [
             'title'   => 'Créer un frais hors forfait',
@@ -78,7 +78,7 @@ public function create(): void
 
     public function store(): void
 {
-    if (empty($_SESSION['user'])) $this->redirect('/');
+    if (empty($_SESSION['user'])) $this->redirect('/index.php');
 
     $date_frais    = trim($_POST['date_frais'] ?? '');
     $libelle = trim($_POST['libelle'] ?? '');
@@ -93,7 +93,7 @@ public function create(): void
     if (!empty($errors)) {
         $_SESSION['errors'] = $errors;
         $_SESSION['old'] = compact('date_frais', 'libelle', 'montant');
-        $this->redirect('./frais_hors_forfait/create');
+        $this->redirect('/index.php/frais_hors_forfait/create');
     }
 
     try {
@@ -101,10 +101,10 @@ public function create(): void
         $id = lignefraishorforfait::create($dateObj, $libelle, (float)$montant);
 
         $_SESSION['flash'] = 'Frais hors forfait créé avec succès.';
-        $this->redirect('./frais_hors_forfait/' . $id);
+        $this->redirect('/index.php/frais_hors_forfait/' . $id);
     } catch (\Throwable $e) {
         $_SESSION['flash'] = 'Impossible de créer le frais hors forfait.';
-        $this->redirect('./frais_hors_forfait/create');
+        $this->redirect('/index.php/frais_hors_forfait/create');
     }
 
 }
@@ -112,14 +112,14 @@ public function create(): void
  public function update(int $id): void
 {
     if (empty($_SESSION['user'])) {
-        $this->redirect('/');
+        $this->redirect('/index.php');
     }
 
     $frais_hors_forfait = lignefraishorforfait::findById($id);
 
     if (!$frais_hors_forfait) {
         $_SESSION['flash'] = 'frais hors forfait introuvable.';
-        $this->redirect('./frais_hors_forfait');
+        $this->redirect('/index.php/frais_hors_forfait');
     }
 
     $this->render('frais_hors_forfait/update', [
@@ -142,7 +142,7 @@ public function create(): void
     public function save(int $id): void
     {
         if (empty($_SESSION['user'])) {
-            $this->redirect('/');
+            $this->redirect('/index.php');
         }
         $date_frais = trim($_POST['date_frais'] ?? '');
         $libelle = trim($_POST['libelle'] ?? '');
@@ -161,7 +161,7 @@ public function create(): void
             $_SESSION['old']    = ['libelle' => $libelle];
             $_SESSION['old']    = ['montant' => $montant];
             $_SESSION['flash']  = 'Merci de corriger les erreurs du formulaire.';
-            $this->redirect('./frais_hors_forfait/' . $id . '/update');
+            $this->redirect('/index.php/frais_hors_forfait/' . $id . '/update');
         }
 
 
@@ -170,18 +170,18 @@ public function create(): void
             lignefraishorforfait::update($id, $dateObj, $libelle, (float)$montant);
 
             $_SESSION['flash'] = 'frais hors forfait modifié avec succès.';
-            $this->redirect('./frais_hors_forfait/' . $id);
+            $this->redirect('/index.php/frais_hors_forfait/' . $id);
 
             } catch (\Throwable $e) {
             $_SESSION['flash'] = 'Impossible de modifier le frais hors forfait.';
-            $this->redirect('./frais_hors_forfait/' . $id . '/update');
+            $this->redirect('/index.php/frais_hors_forfait/' . $id . '/update');
 }
 
     }
      public function delete(int $id): void
 {
         if (empty($_SESSION['user'])) {
-        $this->redirect('/');
+        $this->redirect('/index.php');
     }
 
     try {
@@ -191,13 +191,13 @@ public function create(): void
         $_SESSION['flash'] = 'Impossible de supprimer le frais hors forfait.';
     }
 
-    $this->redirect('./frais_hors_forfait');
+    $this->redirect('/index.php/frais_hors_forfait');
 }
  
 public function updateMontant(int $id): void
 {
     if (empty($_SESSION['user'])) {
-        $this->redirect('/');
+        $this->redirect('/index.php');
     }
 
     $montant = trim($_POST['montant'] ?? '');

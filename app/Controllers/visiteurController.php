@@ -10,7 +10,7 @@ final class visiteurController extends Controller
 {
     // 🚫 Vérifie si l'utilisateur est connecté
     if (empty($_SESSION['user'])) {
-    $this->redirect('/');
+    $this->redirect('/index.php');
 }
 
     // 🆕 Récupération du critère de recherche
@@ -44,7 +44,7 @@ final class visiteurController extends Controller
     public function show($id): void
     {
         if (empty($_SESSION['user'])) {
-    $this->redirect('/');
+    $this->redirect('/index.php');
 }
 
         $id = (int)$id;
@@ -55,7 +55,7 @@ final class visiteurController extends Controller
             if (!$visiteur) {
                 http_response_code(404);
                 $_SESSION['flash'] = 'visiteur introuvable.';
-                $this->redirect('/visiteur');
+                $this->redirect('/index.php/visiteur');
             }
         } catch (\Throwable $e) {
             $_SESSION['flash'] = 'Erreur lors du chargement du visiteur.';
@@ -73,7 +73,7 @@ final class visiteurController extends Controller
     public function create(): void
 {
     if (empty($_SESSION['user'])) {
-    $this->redirect('/');
+    $this->redirect('/index.php');
 }
 
     $this->render('visiteur/create', [
@@ -100,7 +100,7 @@ final class visiteurController extends Controller
    public function store(): void
 {
    if (empty($_SESSION['user'])) {
-    $this->redirect('/');
+    $this->redirect('/index.php');
 }
     $nom            = trim($_POST['nom'] ?? '');
     $prenom         = trim($_POST['prenom'] ?? '');
@@ -176,7 +176,7 @@ final class visiteurController extends Controller
             'roles'
         );
         $_SESSION['flash'] = 'Merci de corriger les erreurs du formulaire.';
-        $this->redirect('/visiteur/create');
+        $this->redirect('/index.php/visiteur/create');
     }
 
     try {
@@ -190,28 +190,27 @@ final class visiteurController extends Controller
             $login,
             $mdp,
             $login,
-            $roles
-            
-        );
+            $roles,
+            );
 
         $_SESSION['flash'] = 'Visiteur créé avec succès.';
-        $this->redirect('./visiteur');
+        $this->redirect('/index.php/visiteur');
     } catch (\Throwable $e) {
         $_SESSION['flash'] = 'Impossible de créer le visiteur.';
-        $this->redirect('/visiteur/create');
+        $this->redirect('/index.php/visiteur/create');
     }
 }
 public function update(int $id): void
 {
    if (empty($_SESSION['user'])) {
-    $this->redirect('/');
+    $this->redirect('/index.php');
 }
 
     $visiteur = visiteur::findById($id);
 
     if (!$visiteur) {
         $_SESSION['flash'] = 'Visiteur introuvable.';
-        $this->redirect('/visiteur');
+        $this->redirect('/index.php/visiteur');
     }
 
     $this->render('visiteur/update', [
@@ -227,7 +226,7 @@ public function update(int $id): void
 public function save(int $id): void
 {
     if (empty($_SESSION['user'])) {
-    $this->redirect('/');
+    $this->redirect('/index.php');
 }
 
     $nom           = trim($_POST['nom'] ?? '');
@@ -255,7 +254,7 @@ public function save(int $id): void
         $_SESSION['old'] = compact(
             'nom','prenom','adresse','ville','CP','date_embauche','login','roles'
         );
-        $this->redirect("/visiteur/$id/update");
+        $this->redirect("/index.php/visiteur/$id/update");
     }
 
     visiteur::update(
@@ -271,17 +270,17 @@ public function save(int $id): void
     );
 
     $_SESSION['flash'] = 'Visiteur modifié avec succès.';
-    $this->redirect("/visiteur/$id");
+    $this->redirect("/index.php/visiteur/$id");
 }
 public function delete(int $id): void
 {
    if (empty($_SESSION['user'])) {
-    $this->redirect('/');
+    $this->redirect('/index.php');
 }
 
     visiteur::delete($id);
     $_SESSION['flash'] = 'Visiteur supprimé.';
-    $this->redirect('/visiteur');
+    $this->redirect('/index.php/visiteur');
 }
 
 

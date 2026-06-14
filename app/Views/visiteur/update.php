@@ -60,7 +60,7 @@ td a{display:inline-block;margin-bottom:5px}
     <div class="flash"><?= htmlspecialchars($message) ?></div>
 <?php endif; ?>
 
-<form method="post" action="<?= BASE_URL ?>visiteur/<?= $visiteur['ID'] ?>/update">
+<form method="post" action="/index.php/visiteur/<?= $visiteur['ID'] ?>/update">
 
 
     <label>Nom</label>
@@ -101,7 +101,7 @@ td a{display:inline-block;margin-bottom:5px}
     </select>
 
     <button type="submit">Enregistrer</button>
-    <a href="<?= BASE_URL ?>visiteur">Annuler</a>
+    <a href="/index.php/visiteur">Annuler</a>
 
     
 </form>

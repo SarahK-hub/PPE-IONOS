@@ -47,9 +47,9 @@ td a{display:inline-block;margin-bottom:5px}
 <body>
     <div class="topbar">
         <h1 style="margin:0;">Liste des Frais forfaits</h1>
-        <a class="button" href="./dashboard">Dashboard</a>
-        <a class="button" href="./logout">Se déconnecter</a>
-        <a class="button" href="<?= BASE_URL ?>fraisforfait/create">Inserer</a>
+        <a class="button" href="/index.php/dashboard">Dashboard</a>
+        <a class="button" href="/index.php/logout">Se déconnecter</a>
+        <a class="button" href="/index.php/fraisforfait/create">Inserer</a>
         
     </div>
 
@@ -76,11 +76,11 @@ td a{display:inline-block;margin-bottom:5px}
                         <td><?= htmlspecialchars((string)$frais['libelle']) ?></td>
                         <td><?= htmlspecialchars((string)$frais['montant']) ?></td>
                         <td>
-                        <a class="button" href="<?= BASE_URL ?>fraisforfait/<?= $frais['id'] ?>">Voir</a>
-                        <a class="button" href="<?= BASE_URL ?>fraisforfait/<?= $frais['id'] ?>/update">Modifier</a>
+                        <a class="button" href="/index.php/fraisforfait/<?= $frais['id'] ?>">Voir</a>
+                        <a class="button" href="/index.php/fraisforfait/<?= $frais['id'] ?>/update">Modifier</a>
 
                         <form method="post"
-                        action="<?= BASE_URL ?>fraisforfait/<?= (int)$frais['id'] ?>/delete"
+                        action="/index.php/fraisforfait/<?= (int)$frais['id'] ?>/delete"
                         style="display:inline"
                         onsubmit="return confirm('Voulez-vous vraiment supprimer ce frais forfait ?');">
                         <button type="submit">Supprimer</button>
