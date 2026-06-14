@@ -114,6 +114,8 @@ $router->get('#^/fichefrais/([a-zA-Z0-9_-]+)/([0-9]{6})$#',         [Controllers
 $router->get('#^/fichefrais/([a-zA-Z0-9_-]+)/([0-9]{6})/update$#',  [Controllers\fichefraisController::class, 'update']);
 $router->post('#^/fichefrais/([a-zA-Z0-9_-]+)/([0-9]{6})/update$#', [Controllers\fichefraisController::class, 'save']);
 $router->post('#^/fichefrais/([a-zA-Z0-9_-]+)/([0-9]{6})/delete$#', [Controllers\fichefraisController::class, 'delete']);
+$router->post('#^/fichefrais/([a-zA-Z0-9_-]+)/([0-9]{6})/horsforfait/([0-9]+)/update$#',[Controllers\fichefraisController::class, 'updateFraisHorsForfait']);
+
 
 // ===================== NORMALISATION DU PATH (IONOS) =====================
 $uriPath    = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH) ?: '/';
