@@ -28,7 +28,7 @@ button{background:#3498db;color:#fff;padding:10px 15px;border:none;border-radius
 <h1>Modifier fiche de frais</h1>
 
 <form method="post"
-      action="/index.php/fichefrais<?= $IDVisiteur ?><?= $mois ?>/horsforfait/<?= $id ?>/update">
+      action="/index.php/fichefrais<?= $IDVisiteur ?><?= $mois ?>/horsforfait<?= $id ?>/update">
 <!-- ===================== -->
 <!-- 👤 VISITEUR -->
 <!-- ===================== -->
