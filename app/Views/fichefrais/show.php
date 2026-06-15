@@ -48,7 +48,7 @@ tfoot td{font-weight:bold;background:#ecf0f1}
 
 <?php if (!$readonly): ?>
     <a class="btn btn-edit"
-       href="/index.php/fichefrais/<?= $fiche['IDvisiteur'] ?><?= $fiche['mois'] ?>/update">
+       href="/index.php/fichefrais/<?= $fiche['IDvisiteur'] ?>/<?= $fiche['mois'] ?>/update">
         Modifier
     </a>
 

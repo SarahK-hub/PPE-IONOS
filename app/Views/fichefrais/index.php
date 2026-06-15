@@ -84,7 +84,7 @@ tr:hover{background:#d6eaf8}
             Voir
         </a>
         <?php if (!$cloture && !$valide ): ?>
-          <a class="button" href="/fichefrais/<?= $f['IDvisiteur'] ?>/<?= $f['mois'] ?>/update">Modifier</a>
+          <a class="button" href="/index.php/fichefrais/<?= $f['IDvisiteur'] ?>/<?= $f['mois'] ?>/update">Modifier</a>
           <form method="post"
                 action="/index.php/fichefrais/<?= $f['IDvisiteur'] ?>/<?= $f['mois'] ?>/delete"
                 style="display:inline"
