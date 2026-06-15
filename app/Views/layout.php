@@ -301,6 +301,7 @@ td, th {
 
     <a href="/index.php/fichefrais/create">Nouvelle fiche</a>
     <a href="/index.php/fichefrais">Mes fiches</a>
+    <a href="/index.php/frais_hors_forfait/create">Nouveau hors forfait</a>
     <a href="/index.php/logout" style="margin-left:auto;color:#e74c3c;font-weight:bold;">⎋ Déconnexion</a>
 
 <?php else: ?>
