@@ -23,7 +23,7 @@
 
 <a href="/index.php/fraisforfait" class="card">
     <h2> Gérer les Frais forfaits</h2>
-    <p>Ajouter, modifier ou supprimer</p>
+    <p>Ajouter ou supprimer</p>
 </a>
 
 
