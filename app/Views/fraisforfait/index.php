@@ -72,15 +72,15 @@ td a{display:inline-block;margin-bottom:5px}
             <tbody>
                 <?php foreach ($fraisforfaits as $frais): ?>
                     <tr>
-                        <td><?= htmlspecialchars((string)$frais['id']) ?></td>
+                        <td><?= htmlspecialchars((string)$frais['ID']) ?></td>
                         <td><?= htmlspecialchars((string)$frais['libelle']) ?></td>
                         <td><?= htmlspecialchars((string)$frais['montant']) ?></td>
                         <td>
-                        <a class="button" href="/index.php/fraisforfait/<?= $frais['id'] ?>">Voir</a>
-                        <a class="button" href="/index.php/fraisforfait/<?= $frais['id'] ?>/update">Modifier</a>
+                        <a class="button" href="/index.php/fraisforfait/<?= $frais['ID'] ?>">Voir</a>
+                        <a class="button" href="/index.php/fraisforfait/<?= $frais['ID'] ?>/update">Modifier</a>
 
                         <form method="post"
-                        action="/index.php/fraisforfait/<?= (int)$frais['id'] ?>/delete"
+                        action="/index.php/fraisforfait/<?= (int)$frais['ID'] ?>/delete"
                         style="display:inline"
                         onsubmit="return confirm('Voulez-vous vraiment supprimer ce frais forfait ?');">
                         <button type="submit">Supprimer</button>
