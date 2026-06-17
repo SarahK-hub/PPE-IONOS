@@ -6,7 +6,7 @@
 
 <div class="dashboard-grid">
 
-    <a href="index.php/fichefrais" class="card">
+    <a href="/index.php/fichefrais" class="card">
         <h2> Suivi des fiches</h2>
         <p>Valider et suivre les fiches de frais</p>
     </a>
