@@ -77,7 +77,7 @@ td a{display:inline-block;margin-bottom:5px}
                         <td><?= htmlspecialchars((string)$frais['montant']) ?></td>
                         <td>
                         <a class="button" href="/index.php/fraisforfait/<?= $frais['id'] ?>">Voir</a>
-                        <a class="button" href="/index.php/fraisforfait/<?= $frais['id'] ?>/update">Modifier</a>
+                       
 
                         <form method="post"
                         action="/index.php/fraisforfait/<?= (int)$frais['id'] ?>/delete"
