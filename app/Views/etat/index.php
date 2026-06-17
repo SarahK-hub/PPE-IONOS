@@ -1,11 +1,36 @@
-
+<!-- 
+|--------------------------------------------------------------------------
+| Vue : Liste des états
+|--------------------------------------------------------------------------
+|
+| Rôle :
+| Cette page affiche l'ensemble des états enregistrés dans la base
+| de données sous forme de tableau.
+|
+| Données disponibles :
+| - $title   : titre de la page
+| - $etats   : liste des états récupérés depuis la base
+| - $message : message flash (succès ou erreur)
+|
+| Fonctionnalités :
+| - Affichage de tous les états
+| - Consultation du détail d'un état
+| - Modification d'un état
+| - Suppression d'un état
+| - Accès au formulaire de création
+| -->
 <!doctype html>
 <html lang="fr">
 <head>
     
     <meta charset="utf-8">
+
+    <!-- Titre de l'onglet du navigateur -->
     <title><?= htmlspecialchars($title ?? 'États') ?></title>
+
+    <!-- Responsive mobile -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <style>
 body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:#f0f2f5;color:#2c3e50;margin:0;padding:0 20px}
 
@@ -46,6 +71,8 @@ td a{display:inline-block;margin-bottom:5px}
     
 </head>
 <body>
+
+     <!-- Titre principal et bouton dashboard, inserer et deconnecter -->
     <div class="topbar">
         <h1 style="margin:0;">Liste des États</h1>
         <a class="button" href="/index.php/dashboard">Dashboard</a>
@@ -55,6 +82,7 @@ td a{display:inline-block;margin-bottom:5px}
          
     </div>
 
+     <!-- message flash -->
      <?php if (!empty($message)): ?>
         <div class="flash"><?= htmlspecialchars($message) ?></div>
     <?php endif; ?>
@@ -62,6 +90,8 @@ td a{display:inline-block;margin-bottom:5px}
     <?php if (empty($etats)): ?>
         <p>Aucun état trouvé.</p>
     <?php else: ?>
+
+        <!-- tableau 3 colonnes : ID, libellé et action -->
         <table>
             <thead>
                 <tr>
@@ -71,15 +101,25 @@ td a{display:inline-block;margin-bottom:5px}
                 </tr>
             </thead>
           <tbody>
+
 <?php foreach ($etats as $etat): ?>
     <tr>
+        <!-- colonne : ID -->
         <td><?= htmlspecialchars((string)$etat['id']) ?></td>
+
+        <!-- colonne : libellé -->
         <td><?= htmlspecialchars((string)$etat['libelle']) ?></td>
+
+        <!-- colonne : libellé -->
         <td>
+
+            <!-- bouton voir -->
            <a class="button" href="/index.php/etat/<?= $etat['id'] ?>">Voir</a>
+
+           <!-- bouton modifier -->
            <a class="button" href="/index.php/etat/<?= $etat['id'] ?>/update">Modifier</a>
 
-
+            <!-- bouton supprimer avec message flash dès le clic -->
            <form method="post"
                   action="/index.php/etat/<?= (int)$etat['id'] ?>/delete"
                   style="display:inline"
@@ -87,6 +127,7 @@ td a{display:inline-block;margin-bottom:5px}
                 <button type="submit">Supprimer</button>
             </form>
         </td>
+        
     </tr>
 <?php endforeach; ?>
 </tbody>

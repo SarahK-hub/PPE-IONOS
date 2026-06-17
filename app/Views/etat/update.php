@@ -1,9 +1,27 @@
 <?php
-// Variables disponibles :
-// $title   : titre de la page ("Créer un état")
-// $message : message flash éventuel
-// $old     : valeurs précédentes du formulaire (['libelle' => '...'])
-// $errors  : erreurs de validation (['libelle' => '...'])
+/*
+|--------------------------------------------------------------------------
+| Vue : Modification d'un état
+|--------------------------------------------------------------------------
+|
+| Rôle :
+| Cette page affiche un formulaire permettant de modifier
+| les informations d'un état existant.
+|
+| Données disponibles :
+| - $title   : titre de la page
+| - $etat    : état actuellement chargé
+| - $old     : anciennes valeurs saisies
+| - $errors  : erreurs de validation
+| - $message : message flash éventuel
+|
+| Fonctionnalités :
+| - Pré-remplissage des données existantes
+| - Validation du formulaire
+| - Affichage des erreurs utilisateur
+| - Enregistrement des modifications
+|
+*/
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -52,6 +70,8 @@ td a{display:inline-block;margin-bottom:5px}
 </head>
 <body>
 
+    <!-- titre principal --> 
+
     <h1><?= htmlspecialchars($title ?? 'Modifier un état', ENT_QUOTES, 'UTF-8'); ?></h1>
 
     <?php if (!empty($message)): ?>
@@ -60,6 +80,7 @@ td a{display:inline-block;margin-bottom:5px}
         </div>
     <?php endif; ?>
 
+    <!-- formulaire modification libellé --> 
     <form method="post" action="/index.php/etat/<?= (int)$etat['id'] ?>/update">
         <div class="field">
             <label for="libelle">Libellé</label>
@@ -70,6 +91,8 @@ td a{display:inline-block;margin-bottom:5px}
                 value="<?= htmlspecialchars($old['libelle'] ?? '', ENT_QUOTES, 'UTF-8'); ?>"
                 required
             >
+
+             <!-- Message d'erreur sous le champ -->
             <?php if (!empty($errors['libelle'])): ?>
                 <div class="error">
                     <?= htmlspecialchars($errors['libelle'], ENT_QUOTES, 'UTF-8'); ?>
@@ -77,6 +100,7 @@ td a{display:inline-block;margin-bottom:5px}
             <?php endif; ?>
         </div>
 
+    <!-- Bouton d'enregistrement  et lien d'annulation-->
         <button type="submit">Enregistrer</button>
         <a href="/index.php/etat">Annuler</a>
     </form>

@@ -1,3 +1,24 @@
+
+<!-- /*
+|--------------------------------------------------------------------------
+| Vue : Détail d'un état
+|--------------------------------------------------------------------------
+|
+| Rôle :
+| Cette page affiche les informations détaillées d'un état
+| sélectionné par son identifiant.
+|
+| Données disponibles :
+| - $title   : titre de la page
+| - $etat    : informations de l'état à afficher
+| - $message : message flash éventuel
+|
+| Fonctionnalités :
+| - Affichage de l'identifiant
+| - Affichage du libellé
+| - Retour vers la liste des états
+|
+*/ -->
 <!doctype html>
 <html lang="fr">
 <head>
@@ -40,22 +61,28 @@ input,button,a.button{width:100%;margin-bottom:10px}
 td a{display:inline-block;margin-bottom:5px}
 }
 </style>
->
+
     
 </head>
 <body>
+    <!-- titre principal -->
     <h1>Détail de l’état</h1>
 
     <?php if (!empty($message)): ?>
         <div class="flash"><?= htmlspecialchars($message) ?></div>
     <?php endif; ?>
 
+    <!-- detail id et libellé si etat non vide --> 
     <?php if (!empty($etat)): ?>
         <div class="card">
             <p><strong>ID :</strong> <?= htmlspecialchars($etat['id']) ?></p>
             <p><strong>Libellé :</strong> <?= htmlspecialchars($etat['libelle']) ?></p>
         </div>
+
+        <!-- bouton retour --> 
         <a class="button" href="/index.php/etat">⬅ Retour à la liste</a>
+
+    <!-- bouton retour si etat vide--> 
     <?php else: ?>
         <p>État introuvable.</p>
         <a class="button" href="/index.php/etat">Retour à la liste</a>

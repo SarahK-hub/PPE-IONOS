@@ -1,26 +1,55 @@
 <?php
-// Variables disponibles :
-// $title   : titre de la page ("Créer un état")
-// $message : message flash éventuel
-// $old     : valeurs précédentes du formulaire (['libelle' => '...'])
-// $errors  : erreurs de validation (['libelle' => '...'])
+
+/* 
+|--------------------------------------------------------------------------
+| Vue : Création d'un état
+|--------------------------------------------------------------------------
+|
+| Rôle :
+| Cette page affiche un formulaire permettant de créer
+| un nouvel état dans la base de données.
+|
+| Données disponibles :
+| - $title   : titre de la page
+| - $message : message flash éventuel
+| - $old     : anciennes valeurs saisies
+| - $errors  : erreurs de validation
+|
+| Fonctionnalités :
+| - Saisie du libellé
+| - Validation des données
+| - Affichage des erreurs utilisateur
+| - Enregistrement d'un nouvel état
+| */
+
+
 ?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     
     <meta charset="UTF-8">
-    <title><?= htmlspecialchars($title ?? 'Créer un état', ENT_QUOTES, 'UTF-8'); ?></title>
+    <!-- Titre de l'onglet du navigateur -->
+
+    <title>
+        <?= htmlspecialchars($title ?? 'Créer un état', ENT_QUOTES, 'UTF-8'); ?>
+   </title>
+
+    <!-- Responsive mobile -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
+
+ /* Style général de la page */
 body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:#f0f2f5;color:#2c3e50;margin:0;padding:0 20px}
 
 .topbar{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin:20px 0}
 .topbar h1{margin:0;font-size:1.8rem;flex:1}
 
+/* Boutons */
 a.button,button,input[type=submit]{display:inline-block;padding:10px 16px;border-radius:6px;border:none;background:#3498db;color:#fff;font-weight:bold;cursor:pointer;text-decoration:none;transition:.3s,.2s}
 a.button:hover,button:hover,input[type=submit]:hover{background:#2980b9;transform:translateY(-2px)}
 
+/* Message flash */
 .flash{padding:10px 15px;margin:15px 0;border-radius:6px;font-weight:bold}
 .flash-success{background:#2ecc71;color:#fff}
 .flash-error{background:#e74c3c;color:#fff}
@@ -33,12 +62,20 @@ tr:hover{background:#d6eaf8}
 td a{color:#3498db;font-weight:bold;text-decoration:none}
 td a:hover{text-decoration:underline}
 
+ /* Bloc formulaire */
 form{max-width:500px;background:#fff;padding:20px;border-radius:6px;box-shadow:0 4px 10px rgba(0,0,0,.05);margin-bottom:30px}
+
+/* Espacement des champs */
 .field{margin-bottom:15px}
+
+/* Label */
 label{display:block;margin-bottom:5px;font-weight:bold}
+
+/* Champ texte */
 input[type=text],input[type=number],textarea{width:100%;padding:8px 12px;border-radius:6px;border:1px solid #ccc;font-size:1rem;box-sizing:border-box}
 input:focus,textarea:focus{outline:none;border-color:#3498db}
 
+/* Message d'erreur */
 .error{color:#e74c3c;font-size:.9rem;margin-top:4px}
 
 @media(max-width:600px){
@@ -53,15 +90,20 @@ td a{display:inline-block;margin-bottom:5px}
 </head>
 <body>
 
+        <!-- Titre principal -->  
     <h1><?= htmlspecialchars($title ?? 'Créer un état', ENT_QUOTES, 'UTF-8'); ?></h1>
 
+    <!-- Affichage d'un message flash -->
     <?php if (!empty($message)): ?>
         <div class="flash">
             <?= htmlspecialchars($message, ENT_QUOTES, 'UTF-8'); ?>
         </div>
     <?php endif; ?>
 
+    <!-- Formulaire de création -->
     <form action="/index.php/etat/create" method="post">
+
+    <!-- Champ libellé -->
         <div class="field">
             <label for="libelle">Libellé</label>
             <input
@@ -71,6 +113,8 @@ td a{display:inline-block;margin-bottom:5px}
                 value="<?= htmlspecialchars($old['libelle'] ?? '', ENT_QUOTES, 'UTF-8'); ?>"
                 required
             >
+
+            <!-- Message d'erreur sous le champ -->
             <?php if (!empty($errors['libelle'])): ?>
                 <div class="error">
                     <?= htmlspecialchars($errors['libelle'], ENT_QUOTES, 'UTF-8'); ?>
@@ -78,7 +122,10 @@ td a{display:inline-block;margin-bottom:5px}
             <?php endif; ?>
         </div>
 
+        <!-- Bouton d'enregistrement -->
         <button type="submit">Enregistrer</button>
+
+         <!-- Retour à la liste -->
         <a href="/index.php/etat">Annuler</a>
     </form>
 
