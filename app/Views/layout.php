@@ -297,17 +297,21 @@ td, th {
 <?php if (!empty($_SESSION['user'])): ?>
 <div class="menu">
 
+<!-- navbar visiteur -->
 <?php if ($_SESSION['user']['roles'] === 'visiteur'): ?>
 
     <a href="/index.php/fichefrais/create">Nouvelle fiche</a>
     <a href="/index.php/fichefrais">Mes fiches</a>
     <a href="/index.php/frais_hors_forfait/create">Nouveau hors forfait</a>
     <a href="/index.php/logout" style="margin-left:auto;color:#e74c3c;font-weight:bold;">⎋ Déconnexion</a>
-
+    
+<!-- navbar comptable -->
 <?php else: ?>
+    
     <a href="/index.php/etat">etat</a>
     <a href="/index.php/fichefrais">Suivi fiches</a>
     <a href="/index.php/visiteur">Visiteurs</a>
+    <a href="/index.php/fraisforfait">Frais forfait</a>
     <a href="/index.php/logout" style="margin-left:auto;color:#e74c3c;font-weight:bold;">⎋ Déconnexion</a>
 
 <?php endif; ?>

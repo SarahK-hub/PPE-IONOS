@@ -21,5 +21,11 @@
         <p>Ajouter, modifier ou supprimer</p>
     </a>
 
+<a href="/index.php/fraisforfait" class="card">
+    <h2> Gérer les Frais forfaits</h2>
+    <p>Ajouter, modifier ou supprimer</p>
+</a>
+
+
 
 </div>
