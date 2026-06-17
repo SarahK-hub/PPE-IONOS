@@ -106,7 +106,7 @@ public function create(): void
     try {
         $id=\Models\fraisforfait::create($libelle, (float)$montant);
         $_SESSION['flash'] = 'frais forfait créé avec succès.';
-        $this->redirect('/index.php/fraisforfait/'.$id );
+        $this->redirect('/index.php/fraisforfait' );
 
     } catch (\Throwable $e) {
         $_SESSION['flash'] = 'Impossible de créer le frais forfait.';
